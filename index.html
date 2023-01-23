@@ -11,10 +11,7 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
-    <link
-      rel="stylesheet"
-      href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
-    />
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
     <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Weather Dashboard</title>
   </head>
@@ -28,46 +25,33 @@
 
     <div class="container">
         <div class="row align-items-start">
-          <section class="col-4">
-            <div class="input-group mb-3">
-                <h2>Search for a City:</h2>
+          <section class="col-3">
+            <div class="input-group mb-3 mt-3">
+              <h4>Search for a City:</h4>
             </div>
-
-              <div class="input-group mb-3">
-                <input class="city-search" id="city-name" type="text" class="form-control" placeholder="City Name">
+            <div class="input-group mb-3">
+              <input class="city-search" id="city-name" type="text" class="form-control" placeholder="City Name">
             </div>
             <div class="input-group mb-3">
                 <button class="btn btn-outline-secondary search-btn" type="button" id="button-addon1">Search</button>
-              </div>
-              <hr>
-            <div class="results">
-                <ul class="city-results" id="list-of-results"></ul>
             </div>
-            <!-- city input box -->
-        <!-- display list from local storage -->
+              <hr>
+            <div class="results list-group city-results" id="list-of-cities"> </div>
           </section>
-          <section class="col-8">
-            <section class="city-data">
-                2 of 2 columns
-            </section>
-            
-             <!-- display city weather -->
-        <!-- display 5 day underneath -->
-          
+
+          <section class="col-9">
+            <section class="city-data"></section>
             <section class="display-forecast">
-                <h3>5-Day Forecast:</h3>
-                <div class=""></div>
+                <div class="forecast-container"></div>
             </section>
-        </section>
+          </section>
         </div>
+    </div>
 
-
-
-    
- 
-    <footer>
-
-    </footer>
+  <script
+      src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+      integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U="
+      crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="./assets/js/script.js"></script>
