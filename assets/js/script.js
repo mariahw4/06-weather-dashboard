@@ -91,6 +91,7 @@ async function displayWeather() {
         method: "GET"
       })
         console.log(response);
+    
                 
         var currentWeatherDiv = $("<section class='city-data'>");
         currentWeatherDiv.addClass("current-weather")
