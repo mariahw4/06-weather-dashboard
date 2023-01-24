@@ -1,7 +1,3 @@
-/*To get the icon for the weather, use this URL as the src attribute in an <img> tag: (look for the icon property and use this:
-var iconUrl = `https://openweathermap.org/img/w/${**your-data-ojb**.icon}.png`;*/
-
-
  // Global variables
 var cityList = [];
 var cityname;
@@ -50,13 +46,12 @@ function storeCityArray() {
     localStorage.setItem("cities", JSON.stringify(cityList));
     }
 
-// This function saves the currently display city to local storage
+// This function saves the currently displayed city to local storage
 function storeCurrentCity() {
 
     localStorage.setItem("currentCity", JSON.stringify(cityname));
 }
       
-
 // Click event handler for city search button
 $(".search-btn").on("click", function(event){
     event.preventDefault();
@@ -79,14 +74,14 @@ $(".search-btn").on("click", function(event){
     displayFiveDayForecast();
 });
 
-// Event handler for if the user hits enter after entering the city search term
+// Event handler if the user hits enter after entering the city search term instead of clicking search
 $("#city-name").keypress(function(e){
     if(e.which == 13){
         $(".search-btn").click();
     }
 })
 
-// This function runs the Open Weather API AJAX call and displays the current city, weather, and 5 day forecast to the DOM
+// This function runs the Open Weather async API AJAX call and displays the current city, weather, and 5 day forecast to the DOM once requested
 async function displayWeather() {
 
     var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityname + "&units=imperial&appid=5b4735245dfd66f5f4d0cf9ad8b7706a";
@@ -96,7 +91,7 @@ async function displayWeather() {
         method: "GET"
       })
         console.log(response);
-
+                
         var currentWeatherDiv = $("<section class='city-data'>");
         currentWeatherDiv.addClass("current-weather")
         var getCurrentCity = response.name;
@@ -127,33 +122,33 @@ async function displayFiveDayForecast() {
         url: queryURL,
         method: "GET"
       })
+
       var forecastDiv = $("<section class='display-forecast'>");
       var forecastHeader = $("<h3 class='card-header border-secondary'>").text("5 Day Forecast:");
       forecastDiv.append(forecastHeader);
-      var cardDeck = $("<div  class='card-deck'>");
-      forecastDiv.append(cardDeck);
+      var fiveDayCardContainer = $("<div  class='card-deck'>");
+      forecastDiv.append(fiveDayCardContainer);
       
       console.log(response);
       for (i=0; i<5;i++){
           var forecastCard = $("<div class='cards mb-3 mt-3'>");
-          var cardBody = $("<div class='card-body'>");
+          var fiveDayCard = $("<div class='card-body'>");
           var date = new Date();
           var val=(date.getMonth()+1)+"/"+(date.getDate()+i+1)+"/"+date.getFullYear();
           var forecastDate = $("<h6 class='card-title'>").text(val);
           
-        cardBody.append(forecastDate);
+        fiveDayCard.append(forecastDate);
         var getCurrentWeatherIcon = response.list[i].weather[0].icon;
-        console.log(getCurrentWeatherIcon);
         var displayWeatherIcon = $("<img src = http://openweathermap.org/img/wn/" + getCurrentWeatherIcon + ".png />");
-        cardBody.append(displayWeatherIcon);
+        fiveDayCard.append(displayWeatherIcon);
         var getTemp = response.list[i].main.temp;
         var tempEl = $("<p class='card-text'>").text("Temp: "+getTemp+"° F");
-        cardBody.append(tempEl);
+        fiveDayCard.append(tempEl);
         var getHumidity = response.list[i].main.humidity;
         var humidityEl = $("<p class='card-text'>").text("Humidity: "+getHumidity+"%");
-        cardBody.append(humidityEl);
-        forecastCard.append(cardBody);
-        cardDeck.append(forecastCard);
+        fiveDayCard.append(humidityEl);
+        forecastCard.append(fiveDayCard);
+        fiveDayCardContainer.append(forecastCard);
       }
       $(".forecast-container").html(forecastDiv);
     }
