@@ -133,22 +133,22 @@ async function displayFiveDayForecast() {
       console.log(response);
       for (i=0; i<5;i++){
           var forecastCard = $("<div class='cards mb-3 mt-3'>");
-          var fiveDayCard = $("<div class='card-body'>");
+          var cardEachFiveDay = $("<div class='card-body'>");
           var date = new Date();
           var val=(date.getMonth()+1)+"/"+(date.getDate()+i+1)+"/"+date.getFullYear();
           var forecastDate = $("<h6 class='card-title'>").text(val);
           
-        fiveDayCard.append(forecastDate);
+        cardEachFiveDay.append(forecastDate);
         var getCurrentWeatherIcon = response.list[i].weather[0].icon;
         var displayWeatherIcon = $("<img src = http://openweathermap.org/img/wn/" + getCurrentWeatherIcon + ".png />");
-        fiveDayCard.append(displayWeatherIcon);
+        cardEachFiveDay.append(displayWeatherIcon);
         var getTemp = response.list[i].main.temp;
         var tempEl = $("<p class='card-text'>").text("Temp: "+getTemp+"° F");
-        fiveDayCard.append(tempEl);
+        cardEachFiveDay.append(tempEl);
         var getHumidity = response.list[i].main.humidity;
         var humidityEl = $("<p class='card-text'>").text("Humidity: "+getHumidity+"%");
-        fiveDayCard.append(humidityEl);
-        forecastCard.append(fiveDayCard);
+        cardEachFiveDay.append(humidityEl);
+        forecastCard.append(cardEachFiveDay);
         fiveDayCardContainer.append(forecastCard);
       }
       $(".forecast-container").html(forecastDiv);
