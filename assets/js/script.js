@@ -1,6 +1,6 @@
  // Global variables
 var cityList = [];
-var cityname;
+var cityName;
 
 // local storage functions
 initCityList();
@@ -34,7 +34,7 @@ function initWeather() {
     var storedWeather = JSON.parse(localStorage.getItem("currentCity"));
 
     if (storedWeather !== null) {
-        cityname = storedWeather;
+        cityName = storedWeather;
 
         displayWeather();
         displayFiveDayForecast();
@@ -49,23 +49,23 @@ function storeCityArray() {
 // This function saves the currently displayed city to local storage
 function storeCurrentCity() {
 
-    localStorage.setItem("currentCity", JSON.stringify(cityname));
+    localStorage.setItem("currentCity", JSON.stringify(cityName));
 }
       
 // Click event handler for city search button
 $(".search-btn").on("click", function(event){
     event.preventDefault();
 
-    cityname = $("#city-name").val().trim();
-    if(cityname === ""){
+    cityName = $("#city-name").val().trim();
+    if(cityName === ""){
         alert("Please enter a city to look up")
 
     }else if (cityList.length >= 6){  
         cityList.shift();
-        cityList.push(cityname);
+        cityList.push(cityName);
 
     }else{
-    cityList.push(cityname);
+    cityList.push(cityName);
     }
     storeCurrentCity();
     storeCityArray();
@@ -84,15 +84,14 @@ $("#city-name").keypress(function(e){
 // This function runs the Open Weather async API AJAX call and displays the current city, weather, and 5 day forecast to the DOM once requested
 async function displayWeather() {
 
-    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityname + "&units=imperial&appid=5b4735245dfd66f5f4d0cf9ad8b7706a";
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=imperial&appid=5b4735245dfd66f5f4d0cf9ad8b7706a";
 
     var response = await $.ajax({
         url: queryURL,
         method: "GET"
       })
         console.log(response);
-    
-                
+        
         var currentWeatherDiv = $("<section class='city-data'>");
         currentWeatherDiv.addClass("current-weather")
         var getCurrentCity = response.name;
@@ -117,7 +116,7 @@ async function displayWeather() {
 // This function runs the AJAX call for the 5 day forecast and displays them to the DOM
 async function displayFiveDayForecast() {
 
-    var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q="+cityname+"&units=imperial&appid=5b4735245dfd66f5f4d0cf9ad8b7706a";
+    var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q="+cityName+"&units=imperial&appid=5b4735245dfd66f5f4d0cf9ad8b7706a";
 
     var response = await $.ajax({
         url: queryURL,
@@ -131,7 +130,8 @@ async function displayFiveDayForecast() {
       forecastDiv.append(fiveDayCardContainer);
       
       console.log(response);
-      for (i=0; i<5;i++){
+
+      for (i=0; i<5; i++){
           var forecastCard = $("<div class='cards mb-3 mt-3'>");
           var cardEachFiveDay = $("<div class='card-body'>");
           var date = new Date();
@@ -156,10 +156,10 @@ async function displayFiveDayForecast() {
 
 // This function is used to pass the city in the history list to the displayWeather function
 function historyDisplayWeather(){
-    cityname = $(this).attr("data-name");
+    cityName = $(this).attr("data-name");
     displayWeather();
     displayFiveDayForecast();
-    console.log(cityname);    
+    console.log(cityName);    
 }
 
 $(document).on("click", ".city", historyDisplayWeather);
