@@ -97,7 +97,7 @@ async function displayWeather() {
         var getCurrentCity = response.name;
         var val=dayjs().format('MM/DD/YYYY');
         var getCurrentWeatherIcon = response.weather[0].icon;
-        var displayCurrentWeatherIcon = $("<img src = http://openweathermap.org/img/wn/" + getCurrentWeatherIcon + "@2x.png />");
+        var displayCurrentWeatherIcon = $("<img src = https://openweathermap.org/img/wn/" + getCurrentWeatherIcon + "@2x.png />");
         var currentCityEl = $("<h4 class = 'card-body'>").text(getCurrentCity+" ("+val+")");
         currentCityEl.append(displayCurrentWeatherIcon);
         currentWeatherDiv.append(currentCityEl);
@@ -139,7 +139,7 @@ async function displayFiveDayForecast() {
           
         cardEachFiveDay.append(forecastDate);
         var getCurrentWeatherIcon = response.list[i].weather[0].icon;
-        var displayWeatherIcon = $("<img src = http://openweathermap.org/img/wn/" + getCurrentWeatherIcon + ".png />");
+        var displayWeatherIcon = $("<img src = https://openweathermap.org/img/wn/" + getCurrentWeatherIcon + ".png />");
         cardEachFiveDay.append(displayWeatherIcon);
         var getTemp = response.list[i].main.temp;
         var tempEl = $("<p class='card-text'>").text("Temp: "+getTemp+"° F");
