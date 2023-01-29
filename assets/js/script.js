@@ -134,7 +134,7 @@ async function displayFiveDayForecast() {
       for (i=0; i<5; i++){
           var forecastCard = $("<div class='cards mb-3 mt-3'>");
           var cardEachFiveDay = $("<div class='card-body'>");
-          var val = dayjs().add(i, "days").format("MM/DD/YYYY");
+          var val = dayjs().add(i, "day").format("MM/DD/YYYY");
           var forecastDate = $("<h6 class='card-title'>").text(val);
           
         cardEachFiveDay.append(forecastDate);
